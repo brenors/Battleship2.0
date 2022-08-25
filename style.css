@@ -1,20 +1,33 @@
-body{
-  background-color: bisque"
+body {
+    background-color: "bisque"
 }
-button{
-  background-color: #23a0c6; /* Green */
-border: none;
-color: white;
-padding: 50px 70px;
-text-align: center;
-text-decoration: none;
-display: inline-block;
-font-size: 50px;
+
+button {
+    background-color: #23a0c6;
+    border: none;
+    color: white;
+    padding: 50px 70px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 50px;
 }
-.container{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 2px solid rgb(0, 187, 255);
-  height: 200px;
+
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid rgb(0, 187, 255);
+    height: 200px;
+}
+
+.setlife {
+    background-color: #23a0c6;
+    border: none;
+    color: white;
+    padding: 10px 30px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 10px;
 }
