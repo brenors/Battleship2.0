@@ -28,7 +28,8 @@
                 document.write(`</tr>`)
             }
 
-            document.write('<tr><td colspan="5" style="text-align: center; color: brown; font-size: 25px;"><div id="scoreboard_view_score">Score: 0</div></td><td colspan="5" style="text-align: center; color: brown; font-size: 25px;"><div id="scoreboard_view_lifes">Lifes: 3</div></td></tr></table>');
+            document.write('<tr><td colspan="5" style="text-align: center; color: brown; font-size: 25px;"><div id="scoreboard_view_score">Score: 0</div></td><td colspan="5" style="text-align: center; color: brown; font-size: 25px;"><div id="scoreboard_view_lifes">Lifes: 3</div></td></tr><tr><td colspan="10" style="text-align: center; color: brown; font-size: 25px;"><div id="lasthit">Click Anywhere to Start</div></td></tr></table>');
+            document.write('<center><input type="checkbox" id="messagelh" name="messagelh" value="Hide"><label for= "messagelh0">Hide Message Above</label></center>');
             view_scoreboard();
         }
     </script>
@@ -43,13 +44,15 @@
         function setlifes() {
             var radioButtonGroup = document.getElementsByName("lifes");
             var checkedRadio = Array.from(radioButtonGroup).find((radio) => radio.checked);
-            console.log(checkedRadio.value);
+            // console.log(checkedRadio.value);
             return checkedRadio.value;
         }
         //            water => 0
         //            submarine => 1 (7 pontos)
         //            battleship => 2 (6 pontos)
         //            aircraft carrier => 3 (9 pontos)
+        //            Bomb => 4 (+1 bomb)
+        //            Atomic Bomb => 5 (+1 bomb)
         var grid = [
             [0, 0, 1, 0, 0, 0, 0, 2, 0, 0],
             [0, 0, 0, 0, 3, 0, 0, 0, 1, 0],
@@ -62,9 +65,20 @@
             "images/agua.jpg",
             "images/submarino.jpg",
             "images/navio_de_guerra.jpg",
-            "images/porta_avioes.jpg"
+            "images/porta_avioes.jpg",
+            "images/bomb.png",
+            "images/AtomicBomb.png"
         ]
         var scores = [0, 5, 15, 25];
+
+        var lasttrymessage = [
+            "Only water",
+            "You hit a ship",
+            "You sank a battleship",
+            "You hit the enemy's aircraft",
+            "You found a Bomb",
+            "You found an Atomic Bomb"
+        ]
 
         function init_game() {
             score = 0;
@@ -93,6 +107,13 @@
             type = grid[row][col];
             image = document.getElementById(`tile${row}${col}`);
             image.src = images[type];
+            hidemessage = document.getElementById("messagelh");
+
+            if (hidemessage.checked) {
+                lasthit.innerHTML = `deactivated`;
+            } else {
+                lasthit.innerHTML = `${lasttrymessage[type]}`;
+            }
 
             scoreboard();
         }
@@ -106,6 +127,7 @@
                     gameover = true;
                 }
             }
+
             score += scores[type];
             view_scoreboard();
         }
